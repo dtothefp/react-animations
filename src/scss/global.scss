@@ -1,0 +1,87 @@
+@import 'pantsuit';
+
+$app: #4bb;
+$dark: #477;
+$white: #fff;
+
+$gray1: darken($white,4%);
+$gray3: darken($white,12%);
+$gray4: darken($white,16%);
+
+//  Reset
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+body,
+h1,
+p { margin: 0; }
+
+button {
+  padding: 20px;
+  border-radius: 10px;
+  color: inherit;
+  font: inherit;
+  -webkit-font-smoothing: inherit;
+  letter-spacing: inherit;
+  margin: 0;
+}
+
+[hidden] { display: block; }
+
+//  Base
+
+html,
+body,
+.app { height: 100%; }
+
+html {
+  color: $app;
+  font: 14px/1 "Proxima Nova", "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: .02em;
+}
+
+.app { perspective: 600px; }
+
+//  Content
+
+.main {
+  max-width: 600px;
+  min-height: 100%;
+  margin: 0 auto;
+}
+
+.parent {
+  display: flex;
+  width: 100%;
+  height: 200px;
+  & > div {
+    width: 25%;
+    border: 1px solid goldenrod;
+    position: relative;
+    & > div {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 20px;
+    }
+  }
+  .hide {
+    display: none!important;
+  }
+  .anim {
+    transition: all 1s linear;
+  }
+  .anim-enter {
+    opacity: 0;
+  }
+  .anim-leave {
+    opacity: 0;
+  }
+  .show {
+    opacity: 1!important;
+  }
+}
