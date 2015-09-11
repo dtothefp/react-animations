@@ -1,13 +1,14 @@
 #### Get Started
+
 ```sh
 gulp watch
 gulp build
-
 ```
 
 ![](http://i.imgur.com/hsQwU0a.gif)
 
 #### Animation Classes
+
 ```css
 .hide {
   display: none!important;
