@@ -13,7 +13,7 @@ export default class Div extends Component {
     const hiding = isHiding === num;
     const showThisElm = show === num;
     const hideThisElm = leave === num;
-    const displayNone = hide.indexOf(num) !== -1;
+    const displayNone = hide.includes(num);
     const hslaColor = num * 90;
 
     const classes = cx({

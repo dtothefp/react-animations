@@ -69,9 +69,9 @@ export default class App extends Component {
     isShowing = currentStep;
     isHiding = lastStep;
 
-    const animElms = [isHiding, isShowing];
+    const animElms = toImmutable([isHiding, isShowing]);
     const newState = {
-      hide: this.animElms.filter(key => animElms.indexOf(key) === -1),
+      hide: this.animElms.filter(key => !animElms.includes(key)),
       isShowing,
       isHiding,
       currentStep,
