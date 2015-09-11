@@ -14,7 +14,7 @@ gulp build
   display: none!important;
 }
 
-//Toggles on when .hide is removed
+//Toggles on when .hide or .show is removed
 .anim {
   transition: all 0.3s linear;
 }
