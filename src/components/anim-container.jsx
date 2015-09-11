@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {toImmutable} from 'nuclear-js';
 import {assign} from 'lodash';
 import Div from './anim-elm';
 
@@ -15,10 +16,12 @@ const transitionend = (function(transition) {
 export default class App extends Component {
   constructor(props) {
     super(props);
+    const elms = toImmutable([1, 2, 3, 4]);
+    this.animElms = elms;
     this.state = {
-      isTransitioning: false,
-      currentStep: 1,
-      lastStep: null
+      show: elms.first(),
+      hide: elms.skipUntil((num, i) => i > 0),
+      currentStep: 1
     };
   }
   componentDidMount() {
@@ -27,47 +30,82 @@ export default class App extends Component {
 
     keys.forEach(ref => {
       const elm = React.findDOMNode(this.refs[ref]);
-      elm.addEventListener(transitionend, (e) => {
-        console.log(e, elm);
-      }, false);
+      const num = ref.split('_').slice(-1)[0];
+      const self = this;
+
+      elm.addEventListener(transitionend, function(id, e) {
+        const classList = this.classList;
+        const leaving = classList.contains('leave');
+        const showing = classList.contains('show');
+
+        if (showing) {
+          self.setState(assign({}, self.state, {
+            isShowing: false
+          }));
+        } else if (leaving) {
+          self.setState(assign({}, self.state, {
+            isHiding: false,
+            leave: false,
+            hide: self.state.hide.push(id)
+          }));
+        }
+
+      }.bind(elm, +(num)), false);
     });
   }
   handleClick(e) {
     e.preventDefault();
     let {currentStep} = this.state;
-    const lastStep = currentStep;
-    const hideRef = `div_${currentStep}`;
     let isShowing, isHiding;
-    console.log('HIDE NODE', React.findDOMNode(this.refs[hideRef]));
+    const lastStep = currentStep;
+
     if (currentStep === 4) {
       currentStep = 1;
-      isHiding = 4;
     } else {
       currentStep += 1;
-      isShowing = currentStep;
     }
-    const showRef = `div_${currentStep}`;
-    console.log('SHOW NODE', React.findDOMNode(this.refs[showRef]));
-    this.setState(assign({}, this.state, {
-      currentStep,
-      isTransitioning: true,
-      lastStep,
+    isShowing = currentStep;
+    isHiding = lastStep;
+
+    const animElms = [isHiding, isShowing];
+    const newState = {
+      hide: this.animElms.filter(key => animElms.indexOf(key) === -1),
       isShowing,
-      isHiding
-    }));
+      isHiding,
+      currentStep,
+      show: null
+    };
+
+    this.setState(assign({}, this.state, newState), () => {
+      const elm = React.findDOMNode(this);
+      // force a re-draw
+      elm.offsetHeight;
+
+      const animState = {
+        show: isShowing,
+        leave: isHiding
+      };
+      this.setState(assign({}, this.state, animState));
+    });
   }
   render() {
-    const {currentStep, lastStep} = this.state;
+    const {isShowing, isHiding} = this.state;
     const divs = [1, 2, 3, 4].map(key => {
       const ref = `div_${key}`;
-      return <Div num={key} something="hello" currentStep={currentStep} lastStep={lastStep} ref={ref} />;
+      return <Div num={key} parentState={this.state} ref={ref} />;
     });
+    const props = {};
+
+    if (!isShowing && !isHiding) {
+      assign(props, {onClick: ::this.handleClick});
+    }
+
     return (
       <div>
         <div className="parent" >
           {divs}
         </div>
-        <button onClick={::this.handleClick} >Click</button>
+        <button {...props} >Click</button>
       </div>
     );
   }
