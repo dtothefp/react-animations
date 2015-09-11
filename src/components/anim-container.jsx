@@ -32,27 +32,28 @@ export default class App extends Component {
     keys.forEach(ref => {
       const elm = React.findDOMNode(this.refs[ref]);
       const num = ref.split('_').slice(-1)[0];
-      const self = this;
 
-      elm.addEventListener(transitionend, function(id, e) {
-        const classList = this.classList;
-        const leaving = classList.contains('leave');
-        const showing = classList.contains('show');
-
-        if (showing) {
-          self.setState(assign({}, self.state, {
-            isShowing: false
-          }));
-        } else if (leaving) {
-          self.setState(assign({}, self.state, {
-            isHiding: false,
-            leave: false,
-            hide: self.state.hide.push(id)
-          }));
-        }
-
-      }.bind(elm, +(num)), false);
+      elm.addEventListener(transitionend, this.handleTransitonEnd(elm, num), false);
     });
+  }
+  handleTransitonEnd(elm, num) {
+    return (e) => {
+      const classList = elm.classList;
+      const leaving = classList.contains('leave');
+      const showing = classList.contains('show');
+
+      if (showing) {
+        this.setState(assign({}, this.state, {
+          isShowing: false
+        }));
+      } else if (leaving) {
+        this.setState(assign({}, this.state, {
+          isHiding: false,
+          leave: false,
+          hide: this.state.hide.push(num)
+        }));
+      }
+    };
   }
   handleClick(e) {
     e.preventDefault();
