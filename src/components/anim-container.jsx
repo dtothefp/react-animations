@@ -15,10 +15,20 @@ const transitionend = (function(transition) {
 export default class App extends Component {
   constructor(props) {
     super(props);
+<<<<<<< Updated upstream
     this.state = {
       isTransitioning: false,
       currentStep: 1,
       lastStep: null
+=======
+    const elms = toImmutable([1, 2, 3, 4]);
+    const first = elms.first();
+    this.animElms = elms;
+    this.state = {
+      show: first,
+      hide: elms.skipUntil((num, i) => i > 0),
+      currentStep: first
+>>>>>>> Stashed changes
     };
   }
   componentDidMount() {
@@ -57,11 +67,25 @@ export default class App extends Component {
     }));
   }
   render() {
+<<<<<<< Updated upstream
     const {currentStep, lastStep} = this.state;
     const divs = [1, 2, 3, 4].map(key => {
       const ref = `div_${key}`;
       return <Div num={key} something="hello" currentStep={currentStep} lastStep={lastStep} ref={ref} />;
     });
+=======
+    const {isShowing, isHiding} = this.state;
+    const divs = this.animElms.map(key => {
+      const ref = `div_${key}`;
+      return <Div num={key} parentState={this.state} key={ref} ref={ref} />;
+    }).toJS();
+    const props = {};
+
+    if (!isShowing && !isHiding) {
+      assign(props, {onClick: ::this.handleClick});
+    }
+
+>>>>>>> Stashed changes
     return (
       <div>
         <div className="parent" >

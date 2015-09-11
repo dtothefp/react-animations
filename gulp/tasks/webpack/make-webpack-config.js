@@ -1,5 +1,4 @@
-import {includePaths, utils as pantSuitUtils} from '@hfa/pantsuit';
-import makeEslintConfig from '@hfa/eslint-config';
+import makeEslintConfig from 'open-eslint-config';
 import {assign, merge, omit} from 'lodash';
 import {join} from 'path';
 import webpack from 'webpack';
@@ -32,7 +31,6 @@ export default function(config) {
     mainBundleName
   } = sources;
   const {isDev} = environment;
-  const apConfig = pantSuitUtils.autoprefixer(isDev);
   const {addbase} = utils;
   const DEBUG = ENV === 'development';
   const TEST = ENV === 'test';
@@ -58,7 +56,6 @@ export default function(config) {
     TEST,
     expose,
     extract: !isMainTask,
-    includePaths,
     quick
   });
 
@@ -135,12 +132,22 @@ export default function(config) {
           failOnError: false
         },
         module: {
-          preLoaders: preLoaders,
-          loaders: loaders
+          preLoaders,
+          loaders
         },
         plugins,
         postcss: [
-          autoprefixer(apConfig)
+          autoprefixer({
+            browsers: [
+              'last 2 versions',
+              'Explorer >= 9',
+              'Safari >= 7',
+              'Opera >= 12',
+              'iOS >= 5',
+              'Android >= 3'
+            ],
+            cascade: isDev
+          })
         ],
         devtool: 'source-map'
       };

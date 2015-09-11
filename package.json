@@ -1,6 +1,6 @@
 {
-  "name": "@hfa/frontend-boilerplate",
-  "version": "0.1.0",
+  "name": "frontend-boilerplate",
+  "version": "0.0.1",
   "description": "Build Boilerplate Repo",
   "main": "dist/js/main.js",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HillaryClinton/frontend-boilerplate.git"
+    "url": ""
   },
   "keywords": [
     "gulp"
@@ -17,15 +17,13 @@
   "author": "DtotheFP",
   "license": "Copyright 2015",
   "bugs": {
-    "url": "https://github.com/HillaryClinton/frontend-boilerplate/issues"
+    "url": ""
   },
   "engines": {
     "node": ">=0.12.0"
   },
   "homepage": "",
   "devDependencies": {
-    "@hfa/eslint-config": "0.9.4",
-    "@hfa/pantsuit": "^0.4.1",
     "autoprefixer-core": "^5.2.1",
     "babel": "^5.4.7",
     "babel-core": "^5.8.3",
@@ -48,7 +46,6 @@
     "expose-loader": "^0.7.0",
     "extract-text-webpack-plugin": "^0.8.2",
     "file-loader": "^0.8.4",
-    "glob": "^5.0.13",
     "gulp": "^3.9.0",
     "gulp-eslint": "^1.0.0",
     "gulp-if": "^1.2.5",
@@ -56,7 +53,6 @@
     "gulp-util": "^3.0.3",
     "html-loader": "^0.3.0",
     "imports-loader": "^0.6.4",
-    "js-cookie": "^2.0.3",
     "json-loader": "^0.5.2",
     "karma": "^0.13.0",
     "karma-browserstack-launcher": "^0.1.2",
@@ -71,12 +67,10 @@
     "node-libs-browser": "^0.5.2",
     "node-sass": "^3.2.0",
     "nuclear-js": "^1.1.1",
-    "open": "0.0.5",
+    "open-eslint-config": "git+ssh://git@github.com/dtothefp/open-eslint-config.git",
     "postcss-loader": "^0.5.1",
     "react": "^0.13.3",
     "react-hot-loader": "^1.2.8",
-    "rewire": "^2.3.4",
-    "rimraf": "^2.4.1",
     "run-sequence": "^1.0.2",
     "sass-loader": "^1.0.2",
     "selenium-standalone": "^4.4.3",

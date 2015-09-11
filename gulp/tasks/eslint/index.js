@@ -1,4 +1,4 @@
-import makeEslintConfig from '@hfa/eslint-config';
+import makeEslintConfig from 'open-eslint-config';
 import formatter from 'eslint-friendly-formatter';
 
 export default function(gulp, plugins, config) {

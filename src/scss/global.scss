@@ -1,5 +1,3 @@
-@import 'pantsuit';
-
 $app: #4bb;
 $dark: #477;
 $white: #fff;
@@ -19,13 +17,17 @@ h1,
 p { margin: 0; }
 
 button {
+  display: block;
+  margin: 20px auto;
   padding: 20px;
   border-radius: 10px;
   color: inherit;
   font: inherit;
   -webkit-font-smoothing: inherit;
   letter-spacing: inherit;
-  margin: 0;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 [hidden] { display: block; }
@@ -57,11 +59,14 @@ html {
   display: flex;
   width: 100%;
   height: 200px;
+  position: relative;
   & > div {
-    width: 25%;
-    border: 1px solid goldenrod;
-    position: relative;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
     & > div {
+      color: #000;
       position: absolute;
       top: 50%;
       left: 50%;

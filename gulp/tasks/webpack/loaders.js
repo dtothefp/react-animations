@@ -91,7 +91,7 @@ export default function(opts) {
   let loaders = [
     {
       test: /\.jsx?$/,
-      exclude: /node_modules\/(?!@hfa)/,
+      exclude: /node_modules/,
       loaders: jsxLoader
     },
     {
