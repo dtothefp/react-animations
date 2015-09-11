@@ -60,8 +60,8 @@ export default class App extends Component {
     let isShowing, isHiding;
     const lastStep = currentStep;
 
-    if (currentStep === 4) {
-      currentStep = 1;
+    if (currentStep === this.animElms.size) {
+      currentStep = this.animElms.first();
     } else {
       currentStep += 1;
     }
