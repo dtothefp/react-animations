@@ -14,7 +14,6 @@ export default class Div extends Component {
     const showThisElm = show === num;
     const hideThisElm = leave === num;
     const displayNone = hide.indexOf(num) !== -1;
-    const ref = `div_${num}`;
     const hslaColor = num * 90;
 
     const classes = cx({
@@ -27,7 +26,7 @@ export default class Div extends Component {
     });
 
     return (
-      <div className={classes} ref={ref} key={ref} style={{backgroundColor: `hsla(${hslaColor}, 50%, 45%, 1)`}} >
+      <div className={classes} style={{backgroundColor: `hsla(${hslaColor}, 50%, 45%, 1)`}} >
         <div>{num}</div>
       </div>
     );
