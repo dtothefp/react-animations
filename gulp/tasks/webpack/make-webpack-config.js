@@ -2,7 +2,7 @@ import makeEslintConfig from 'open-eslint-config';
 import {assign, merge, omit} from 'lodash';
 import {join} from 'path';
 import webpack from 'webpack';
-import autoprefixer from 'autoprefixer-core';
+import autoprefixer from 'autoprefixer';
 import formatter from 'eslint-friendly-formatter';
 import makeLoaders from './loaders';
 import makePlugins from './plugins';
